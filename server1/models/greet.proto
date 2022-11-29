@@ -1,0 +1,16 @@
+syntax = "proto3";
+package models;
+
+option go_package = "./models";
+
+message GreetRequest {
+  string message = 1;
+}
+
+message GreetResponse {
+  string message = 1;
+}
+
+service GreetService {
+  rpc Greet(GreetRequest) returns(GreetResponse);
+}
