@@ -1,0 +1,40 @@
+syntax = "proto3";
+package models;
+
+option go_package = "./models";
+
+
+message Request {
+  string manufacturer = 1;
+  int64 userid = 2;
+  string model = 3;
+  int32 year = 4;
+  string color = 5;
+}
+
+message Response {
+  // META -  can/should be grpc meta data?!
+  int64 id = 1;
+  string manufacturer = 2;
+  string model = 3;
+  int32 year = 4;
+  string color = 5;
+}
+
+message GetCarsRequest {
+  int64 userid = 1;
+}
+
+message GetCarsResponse {
+  repeated Response cars = 21;
+}
+
+message DeleteResponse {
+  string msg = 1;
+}
+
+service CarService {
+  rpc BuyCar(Request) returns(Response);
+  rpc GetUserCars(GetCarsRequest) returns (GetCarsResponse);
+  rpc SellUserCar(GetCarsRequest) returns (DeleteResponse);
+}
